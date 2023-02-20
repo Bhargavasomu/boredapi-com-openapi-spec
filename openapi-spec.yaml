@@ -4,49 +4,30 @@ info:
   title: boredapi.com APIs
   version: 1.0.0
 
+servers:
+  - url: https://www.boredapi.com
+    description: Production server
+
 paths:
   /api/activity:
     get:
       summary: Get a random activity
-      responses:
-        200:
-          description: A random activity
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Activity'
-  /api/activity?type={type}:
-    get:
-      summary: Get a random activity by type
       parameters:
-        - in: path
+        - in: query
           name: type
           schema:
             type: string
             enum: [education, recreational, social, diy, charity, cooking, relaxation, music, busywork]
-          required: true
           description: The type of activity
-      responses:
-        200:
-          description: A random activity with the given type
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Activity'
-  /api/activity?participants={participants}:
-    get:
-      summary: Get a random activity by number of participants
-      parameters:
-        - in: path
+        - in: query
           name: participants
           schema:
             type: integer
             minimum: 1
-          required: true
           description: The number of participants
       responses:
         200:
-          description: A random activity with the given number of participants
+          description: A random activity
           content:
             application/json:
               schema:
